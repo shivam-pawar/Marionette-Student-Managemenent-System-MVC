@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Student Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/css/application.css">
+    <script type="text/javascript" src="~/vendor/jquery.js"></script>
+    <script type="text/javascript" src="~/vendor/json2.js"></script>
+    <script type="text/javascript" src="~/vendor/underscore.js"></script>
+    <script src="~/vendor/backbone.js"></script>
+    <script src="~/vendor/backbone.marionette.js"></script>
+    <script src="~/js/app.js"></script>
+    <script src="~/js/entities/student.js"></script>
+    <script src="~/js/apps/students/students_app.js"></script>
+    <script src="~/js/apps/students/list/list_view.js"></script>
+    <script src="~/js/apps/students/list/list_controller.js"></script>
+    <script src="~/js/apps/students/edit/edit_controller.js"></script>
+    <script src="~/js/apps/students/edit/edit_view.js"></script>
+    <script type="text/javascript" language="javascript">
+        window.onload = function () {
+            noBack();
+        }
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand active" href="/">Student Management System</a>
+            </div>
+            <div class="navbar-header active pull-right">
+                <a class="navbar-brand active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Welcome, @ViewData["uname"] <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" style="width: fit-content;margin-left: 15px; text-decoration:none" href="/Login/Logout">&nbsp;<span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="main-region" class="container">
+        <p>Static Content</p>
+    </div>
+    <div id="dialog-region"></div>
+    <script id="student-list-item" type="text/template">
+        <td><%= sid %> </td>
+        <td><%= sname %></td>
+        <td><%= emailid %> </td>
+        <td><%= contact %></td>
+        <td><%= deptname %></td>
+        <td>
+            <a href="#students/<%= sid %>" class="btn btn-small pull-left btn-primary js-edit">
+                <i class="glyphicon glyphicon-pencil "></i>
+                Edit
+            </a>
+            <a class="btn btn-small pull-right btn-danger js-delete">
+                <i class="glyphicon glyphicon-trash"></i>
+                Delete
+            </a>
+        </td>
+    </script>
+    <script type="text/template" id="student-list">
+        <thead>
+            <tr><th>Student ID</th><th>Student Name</th><th>Email ID</th><th>Contact</th><th>Department Name</th><th></th></tr>
+            <tr>
+                <td><input id="sid-input" class="form-control sid-input" ></td>
+                <td><input id="sname-input" class="form-control sname-input" ></td>
+                <td><input id="emailid-input" class="form-control emailid-input" ></td>
+                <td><input id="contact-input" class="form-control contact-input" ></td>
+                <td>
+                    <select style="width: fit-content;" class="form-control dept-input">
+                        <option value="0">Select Department</option>
+                        <option value="1">Computer Science</option>
+                        <option value="2">Electronics</option>
+                        <option value="3">Civil</option>
+                        <option value="4">Mechanical</option>
+                        <option value="5">Electrical</option>
+                    </select>
+                </td>
+                <td>
+                    <button style="width: 40%; height:35px;" class="btn btn-success btn-sm js-add">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Add
+                    </button>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </script>
+    <script type="text/template" id="student-view">
+        <div class="container">
+            <h1>Edit Details</h1>
+            <form>
+                <div class="form-group">
+                    <label for="sname">Name:</label>
+                    <input style="margin-left:33px;" type="text" class="form-control sname-update" value="<%= sname %>">
+                </div>
+                <div class="form-group">
+                    <label for="emailid">Email ID:</label>
+                    <input style="margin-left:10px;" type="text" class="form-control emailid-update" value=<%= emailid %>>
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact:</label>
+                    <input style="margin-left:15px;" type="text" class="form-control contact-update" value=<%= contact %>>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success update-record">
+                        <span class="glyphicon glyphicon-floppy-disk"></span>
+                        Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </script>
+    <script type="text/javascript">
+        StudentManager.start();
+    </script>
+</body>
+</html>

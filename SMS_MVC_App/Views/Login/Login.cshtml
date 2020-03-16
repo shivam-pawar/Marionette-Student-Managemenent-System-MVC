@@ -1,0 +1,67 @@
+﻿@model SMS_MVC_App.Models.HUser
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/application.css">
+    <script type="text/javascript" language="javascript">
+            window.onload = function () {
+                noBack();
+            }
+            function noBack() {
+                window.history.forward();
+            }
+        </script>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body onpageshow="if (event.persisted) noBack();">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand active" href="/">Student Management System</a>
+            </div>
+        </div>
+    </nav>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<form class="login100-form validate-form">
+    <hr />
+    <div class="container" style="margin-left:600px;">
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-1 textstyle" })
+                <div class="col-md-11">
+                    @Html.EditorFor(model => model.Username)
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-1 textstyle" })
+                <div class="col-md-11">
+                    @Html.PasswordFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group" style="margin-left: -100px; margin-top: 50px;">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Login" class="btn btn-primary" style=" width:150px; height: 40px; " />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    }
+</body>
+</html>

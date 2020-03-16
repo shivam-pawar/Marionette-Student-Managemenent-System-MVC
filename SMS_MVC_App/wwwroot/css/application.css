@@ -1,0 +1,11 @@
+body {
+  padding-top: 60px;
+  width:auto;
+  /* 60px to make the container make room for the navigation bar */
+}
+
+.textstyle {
+    text-align: center;
+    margin-right: 10px;
+}
+
